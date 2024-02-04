@@ -64,7 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void insertTask(Task task) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        putValues(task);
+        values = putValues(task);
         db.insert(table_name,null, values);
     }
 
@@ -101,9 +101,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Task> getAllTasks() {
+        db = this.getWritableDatabase();
         Cursor cursor = null;
         List<Task> taskList = new ArrayList<>();
-
         db.beginTransaction();
 
         try {

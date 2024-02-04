@@ -53,10 +53,14 @@ public class AddNewTask extends BottomSheetDialogFragment {
         name = view.findViewById(R.id.task_name);
         saveButton = view.findViewById(R.id.save_button);
         db = new DataBaseHelper(getActivity());
-        boolean isUpdate = false;
+        boolean isUpdate = true;
 
-        if(args != null) {
-            isUpdate = true;
+        if(args == null) {
+            System.out.println("no args");
+            isUpdate = false;
+
+        } else {
+            System.out.println("yes args");
             String taskname = args.getString("name");
             name.setText(taskname);
 
