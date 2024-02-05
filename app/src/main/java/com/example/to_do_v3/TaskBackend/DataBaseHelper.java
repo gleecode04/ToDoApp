@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String db_name ="TODO_DATABASE";
     private static final String table_name ="TODO_TABLE";
 
-    private static final String[] columns = {"NAME","DESCRIPTION","DUE_DATE","TYPE","STATUS"};;
+    private static final String[] columns = {"ID","NAME","DUE_DATE","STATUS"};
     //name, description, due_date, type, status
 
     public DataBaseHelper(@Nullable Context context) {
@@ -31,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String tableCols = "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, DESCRIPTION TEXT, DUE_DATE TEXT, TYPE TEXT, STATUS INTEGER )";
+        String tableCols = "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, DUE_DATE TEXT,STATUS INTEGER )";
         db.execSQL("CREATE TABLE IF NOT EXISTS " + table_name + tableCols);
     }
 
@@ -43,21 +43,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private ContentValues putValues(Task task) {
         ContentValues values = new ContentValues();
-        values.put(columns[0], task.getName()); // set name
-        values.put(columns[1], task.getDescription()); // set description
+        values.put(columns[1], task.getName()); // set name
         values.put(columns[2], task.getDueDate()); // set due date
-        values.put(columns[3], task.getType()); //set type
-        values.put(columns[4], 0); // set check status to unchecked
+        values.put(columns[3], 0); //set type
         return values;
     }
 
-    private ContentValues putValues(String name, String description, String dueDate, String type, int status) {
+    private ContentValues putValues(String name, String dueDate, int status) {
         ContentValues values = new ContentValues();
-        values.put(columns[0], name); // set name
-        values.put(columns[1], description); // set description
+        values.put(columns[1], name); // set name
         values.put(columns[2], dueDate); // set due date
-        values.put(columns[3], type); //set type
-        values.put(columns[4], status); // set check status to unchecked
+        values.put(columns[3], status); // set check status to unchecked
         return values;
     }
 
@@ -74,19 +70,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         switch(type) {
             case "name":
-                values.put(columns[0], value);
-                break;
-            case "description":
                 values.put(columns[1], value);
                 break;
             case "dueDate":
                 values.put(columns[2], value);
                 break;
-            case "type":
-                values.put(columns[3], value);
-                break;
             case "status":
-                values.put(columns[4], Integer.parseInt(value));
+                values.put(columns[3], Integer.parseInt(value));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
@@ -113,12 +103,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     do {
                         Date d = null;
                         @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("ID"));
-                        @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(columns[0]));
-                        @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(columns[1]));
+                        @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(columns[1]));
                         @SuppressLint("Range") String dueDate = cursor.getString(cursor.getColumnIndex(columns[2]));
-                        @SuppressLint("Range") String type = cursor.getString(cursor.getColumnIndex(columns[3]));
-                        @SuppressLint("Range") int status = cursor.getInt(cursor.getColumnIndex(columns[4]));
-                        Task task = new Task(id, name, description, dueDate, type, status);
+                        @SuppressLint("Range") int status = cursor.getInt(cursor.getColumnIndex(columns[3]));
+                        Task task = new Task(id, name, dueDate, status);
                         taskList.add(task);
                     }while (cursor.moveToNext());
                 }

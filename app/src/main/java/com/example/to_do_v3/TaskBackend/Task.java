@@ -8,24 +8,24 @@ public class Task {
 
     private int id;
     private String name;
-    private String description;
+    //private String description;
     private String dueDate;
-    private String type;
+    //private String type;
     private int status = 0;
 
     public Task() {
 
     }
-    public Task(String name, String description, String dueDate, String type,int status) {
+    public Task(String name, String dueDate, int status) {
         this.name = name;
-        this.description = description;
+        //this.description = description;
         this.dueDate = dueDate;
-        this.type = type;
+        //this.type = type;
         this.status = status;
     }
 
-    public Task(int id, String name, String description, String dueDate, String type,int status) {
-        this(name, description, dueDate, type, status);
+    public Task(int id, String name, String dueDate, int status) {
+        this(name, dueDate, status);
         this.id = id;
     }
 
@@ -44,13 +44,13 @@ public class Task {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    //public String getDescription() {
+        //return description;
+    //}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    //public void setDescription(String description) {
+        //this.description = description;
+    //}
 
     public String getDueDate() {
 
@@ -66,13 +66,13 @@ public class Task {
 //        dueDate = sdf.parse(s);
 //    }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public int getStatus() {
         return status;

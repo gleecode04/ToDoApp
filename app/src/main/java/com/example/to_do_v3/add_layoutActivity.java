@@ -18,8 +18,6 @@ import java.util.Locale;
 public class add_layoutActivity extends AppCompatActivity {
 
     TextView nameTextView;
-
-    TextView descriptionTextView;
     TextView textViewSelectDate;
 
     Button saveButton;
@@ -29,6 +27,7 @@ public class add_layoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask_layout);
 
+        //nameTextView = ;
         //Select Date initialization
         textViewSelectDate = findViewById(R.id.due_date_txtview);
 
@@ -39,19 +38,6 @@ public class add_layoutActivity extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
-
-        //Spinner Initialization
-        Spinner spinnerTaskType = findViewById(R.id.task_type);
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.task_types_array, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        spinnerTaskType.setAdapter(adapter);
 
 
     }
